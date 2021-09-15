@@ -9,7 +9,7 @@ const List = () => {
               Company-1
             </option>
           </select>
-          <button type="submit" className="bg-gray-400 text-white w-1/2 h-10">Filter</button>
+          <button type="submit" className="bg-gray-400 text-white w-1/2 h-10">Search</button>
       </form>
         
         </div>
