@@ -11,7 +11,14 @@ const App = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [search, setSearch] = useState(null);
+  const [search, setSearch] = useState("");
+  const [show, setShow] = useState(null);
+
+  const handleShow = (e) => {
+    e.preventDefault();
+    setShow(true);
+
+  }
 
 
   useEffect(() => {
@@ -38,11 +45,15 @@ const App = () => {
     <>
       <div id="main container" className="px-20">
         <Header />
-        <div className="grid grid-cols-3">
+        <div className="grid grid-cols-3 justify-center">
+        <div className={(show) ? "block" : "hidden"}>
           <Filter />
+          </div>
           <div className="col-span-2 flex flex-col space-y-10  ">
-            <Search data={data} onChange={(e) => setSearch(e.target.value)}/>
+            <Search data={data} onChange={(e) => setSearch(e.target.value)} onSubmit={(e) => handleShow(e)}/>
+            <div className={(show) ? "block" : "hidden"}>
             <List data={data} search={search} loading={loading} error={error}/>
+            </div>
           </div>
         </div>
 

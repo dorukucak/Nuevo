@@ -10,8 +10,10 @@ const List = ({ data, search, loading, error }) => {
             <>
                 <div className="border-2 border-black flex flex-col space-y-10 p-16">
 
-                    {data.filter((a) => a.name.startsWith(search)).map((item) =>
-                            <div key={item.id}>
+                    {data.filter((a) => a.name.toUpperCase().startsWith(search.toUpperCase())).map((item) => 
+
+                       
+                           ((search == "" || null) ? null : <div key={item.id}>
                                 <div className="flex flex-row space-x-10 items-center">
                                     <div name="photo" className="border border-black h-20 w-20">
                                         <img src={`${item.image}`} />
@@ -22,9 +24,10 @@ const List = ({ data, search, loading, error }) => {
                                         <p name="job description">{item.jobdescription}</p>
                                     </div>
                                 </div>
-                            </div>
+                          </div>)
+                    
 
-                        )
+                    )
                     }
 
 
