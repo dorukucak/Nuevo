@@ -21,19 +21,16 @@ const App = () => {
   //Index of cards in current page
   const indexOfLastCard = currentPage * cardsPerPage  ;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const filtered = data.filter((a) => a.name.toUpperCase().startsWith(search.toUpperCase()));
+  const filtered = data.filter((a) => a.name.toUpperCase().startsWith(searched.toUpperCase())); // filters JSON according to search
   const currentCards = filtered.slice(indexOfFirstCard, indexOfLastCard); // cards visible in screen
   const paginateFront = () => setCurrentPage(currentPage + 1);
   const paginateBack = () => setCurrentPage(currentPage - 1);
-
- 
-
 
   const handleSearchClick = (e) => {
     e.preventDefault();
     setShow(true);
     setSearched(search);  // prevents immediate search change - sends what search value we want to <List />
- 
+    setCurrentPage(1);
   }
 
   useEffect(() => {
