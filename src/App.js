@@ -84,16 +84,20 @@ const App = () => {
 
   return (
     <>
-      <div id="main container" className="px-20 font-serif">
+      <div id="main container" className="px-10 my-5 sm:px-20 font-serif">
         <Header />
-        <div className={(show) ? "grid grid-cols-3 gap-10 justify-center" : "flex justify-center items-center h-full"}>
-          <div className={(show) ? "block h-full" : "hidden"}>
-            <Filter
+        <div className={(show) ? "flex flex-col md:grid md:grid-cols-3 gap-10 justify-center" : "flex justify-center items-center h-full"}>
+          <div className={(show) ? "flex md:block h-full order-2 md:order-1" : "hidden"}>
+          <div className="order-2 w-full">
+          <Filter
               data={data}
               onAreaFilter={(e) => setAreaFilter(e.target.value)}
               onDescFilter={(e) => setDescFilter(e.target.value)}
               onSubmit={handleFilterClick}
+              
             />
+            </div>
+            <div className="items-start">
             <Pagination
               data={currentCards}
               postsPerPage={cardsPerPage}
@@ -101,9 +105,11 @@ const App = () => {
               paginateBack={paginateBack}
               paginateFront={paginateFront}
               currentPage={currentPage}
+              
             />
+            </div>
           </div>
-          <div className="col-span-2 flex flex-col space-y-10  ">
+          <div className="col-span-2 flex flex-col space-y-10 order-1 md:order-2 ">
             <Search
               data={data}
               onChange={(e) => setSearch(e.target.value)}

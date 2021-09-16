@@ -11,7 +11,7 @@ export default function Pagination({
 
 
   return (
-    <div className='py-2 px-10'>
+    <div className='flex flex-col items-end space-y-2 py-4 px-5 md:px-0'>
       <div>
         <p className='text-sm text-gray-700'>
           Showing
