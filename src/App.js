@@ -58,6 +58,13 @@ const App = () => {
         <div className="grid grid-cols-3 justify-center">
         <div className={(show) ? "block h-full" : "hidden"}>
           <Filter />
+          <Pagination
+        postsPerPage={cardsPerPage}
+        totalPosts={data.length}
+        paginateBack={paginateBack}
+        paginateFront={paginateFront}
+        currentPage={currentPage}
+      />
           </div>
           <div className="col-span-2 flex flex-col space-y-10  ">
             <Search data={data} onChange={(e) => setSearch(e.target.value)} onSubmit={handleSearchClick}/>
@@ -66,13 +73,7 @@ const App = () => {
             </div>
           </div>
         </div>
-        <Pagination
-        postsPerPage={cardsPerPage}
-        totalPosts={data.length}
-        paginateBack={paginateBack}
-        paginateFront={paginateFront}
-        currentPage={currentPage}
-      />
+        
       </div>
      
     </>

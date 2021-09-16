@@ -10,7 +10,7 @@ export default function Pagination({
 
 
   return (
-    <div className='py-2'>
+    <div className='py-2 px-10'>
       <div>
         <p className='text-sm text-gray-700'>
           Showing
