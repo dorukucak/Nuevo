@@ -1,15 +1,14 @@
-const Filter = ({ data, onSubmit, onAreaFilter }) => {
+const Filter = ({ data, onSubmit, onAreaFilter, onDescFilter }) => {
 
-  const Jobs = data.map(item => (item.area));
-  const uniqJobs = [...new Set(Jobs)];
-  //const uniqJobs = Jobs.filter((item, i) => (Jobs[i].area.indexOf(item))); //removes duplicate company names
+  const Jobs = data.map(item => (item.area)).sort();
+  const uniqJobs = [...new Set(Jobs)]; //removes duplicate company names
 
 
     return (
       <>
       <div className="border-2 border-black mx-10">
       <form className="flex flex-col space-y-10 items-center px-16 py-40" onSubmit={onSubmit}>
-      <input type="text" placeholder="Job title" name="title" className="w-full" />
+      <input type="text" placeholder="Job title" name="title" className="w-full" onChange={onDescFilter} />
       <select className="w-full" onChange={onAreaFilter} >
       <option value="">Job areas</option>
         {
