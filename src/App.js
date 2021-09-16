@@ -84,9 +84,9 @@ const App = () => {
 
   return (
     <>
-      <div id="main container" className="px-20">
+      <div id="main container" className="px-20 font-serif">
         <Header />
-        <div className="grid grid-cols-3 justify-center">
+        <div className={(show) ? "grid grid-cols-3 gap-10 justify-center" : "flex justify-center items-center h-full"}>
           <div className={(show) ? "block h-full" : "hidden"}>
             <Filter
               data={data}

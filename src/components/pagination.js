@@ -17,7 +17,7 @@ export default function Pagination({
           Showing
           
           
-          <span className='font-medium'>{" "}{(data.length == 0) ? 0 : currentPage * postsPerPage - 2}{" "}</span>
+          <span className='font-medium'>{" "}{(data.length === 0) ? 0 : currentPage * postsPerPage - 2}{" "}</span>
           
           to
           <span className='font-medium'>{" "}{(currentPage * postsPerPage > totalPosts) ? totalPosts : currentPage * postsPerPage}{" "}</span>
@@ -36,7 +36,7 @@ export default function Pagination({
             onClick={() => {
               paginateBack();
             }}
-            disabled={currentPage == 1}
+            disabled={currentPage === 1}
             className={`${(currentPage <= 1) ? 'disabled: opacity-50 relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500' : 'relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50'}`}
           >
             Previous

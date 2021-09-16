@@ -6,8 +6,8 @@ const List = ({ onChange, data, onSubmit, onCompanyFilter }) => {
     <>
       <div className="border-2 border-black p-5">
         <form className="flex flex-row space-x-10" onSubmit={onSubmit}>
-          <input type="text" placeholder="Name" name="name" className="w-full" onChange={onChange}/>
-          <select className="w-full" onChange={onCompanyFilter}>
+          <input type="text" placeholder="Name" name="name" className="w-full border-b-2 m-0 border-gray-300 placeholder-black onFocus: outline-none" onChange={onChange}/>
+          <select className="w-full border-b-2 border-gray-300 onFocus: outline-none" onChange={onCompanyFilter}>
           <option value="">All companies</option>
             {
               uniqCo.map((item) =>
@@ -15,7 +15,7 @@ const List = ({ onChange, data, onSubmit, onCompanyFilter }) => {
               )
             }
           </select>
-          <button className="bg-gray-400 text-white w-1/2 h-10">Search</button>
+          <button className="bg-green-600 text-white w-1/2 h-10">Search</button>
         </form>
       </div>
 
