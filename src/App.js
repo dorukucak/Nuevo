@@ -13,11 +13,12 @@ const App = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(null);
+  const [searched, setSearched] = useState(""); 
 
-  const handleShow = (e) => {
+  const handleSearchClick = (e) => {
     e.preventDefault();
     setShow(true);
-
+    setSearched(search);    // prevents immediate search change - sends what search value we want to <List />
   }
 
 
@@ -50,9 +51,9 @@ const App = () => {
           <Filter />
           </div>
           <div className="col-span-2 flex flex-col space-y-10  ">
-            <Search data={data} onChange={(e) => setSearch(e.target.value)} onSubmit={(e) => handleShow(e)}/>
+            <Search data={data} onChange={(e) => setSearch(e.target.value)} onSubmit={handleSearchClick}/>
             <div className={(show) ? "block" : "hidden"}>
-            <List data={data} search={search} loading={loading} error={error}/>
+            <List data={data} search={searched} loading={loading} error={error}/>
             </div>
           </div>
         </div>
