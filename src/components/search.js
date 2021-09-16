@@ -9,6 +9,7 @@ const List = ({ onChange, data, onSubmit }) => {
         <form className="flex flex-row space-x-10" onSubmit={onSubmit}>
           <input type="text" placeholder="Name" name="name" className="w-full" onChange={onChange}/>
           <select className="w-full">
+          <option>All companies</option>
             {
               uniqCo.map((item) =>
                 <option value={item.company}>{item.company}</option>

@@ -10,8 +10,8 @@ const List = ({ data, search, loading, error }) => {
             <>
                 <div className="border-2 border-black flex flex-col space-y-10 p-16">
 
-                    {data.filter((a) => a.name.toUpperCase().startsWith(search.toUpperCase())).map((item) =>
-
+                    {data.map((item) =>
+                
 
                     (<div key={item.id}>
                         <div className="flex flex-row space-x-10 items-center">
