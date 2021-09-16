@@ -1,5 +1,8 @@
 const Filter = ({ data, onSubmit, onAreaFilter }) => {
-  const uniqJob = [...new Set(data)]; //removes duplicate company names
+
+  const Jobs = data.map(item => (item.area));
+  const uniqJobs = [...new Set(Jobs)];
+  //const uniqJobs = Jobs.filter((item, i) => (Jobs[i].area.indexOf(item))); //removes duplicate company names
 
 
     return (
@@ -10,8 +13,8 @@ const Filter = ({ data, onSubmit, onAreaFilter }) => {
       <select className="w-full" onChange={onAreaFilter} >
       <option value="">Job areas</option>
         {
-          data.map((item) =>
-            <option value={item.area}>{item.area}</option>
+          uniqJobs.map((item) =>
+            <option value={item}>{item}</option>
           )
         }
       </select>
