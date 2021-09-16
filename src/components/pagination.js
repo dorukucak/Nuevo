@@ -1,6 +1,7 @@
 import React from "react";
 
 export default function Pagination({
+  data,
   postsPerPage,
   totalPosts,
   paginateFront,
@@ -14,7 +15,10 @@ export default function Pagination({
       <div>
         <p className='text-sm text-gray-700'>
           Showing
-          <span className='font-medium'>{" "}{currentPage * postsPerPage - 2}{" "}</span>
+          
+          
+          <span className='font-medium'>{" "}{(data.length == 0) ? 0 : currentPage * postsPerPage - 2}{" "}</span>
+          
           to
           <span className='font-medium'>{" "}{(currentPage * postsPerPage > totalPosts) ? totalPosts : currentPage * postsPerPage}{" "}</span>
           of

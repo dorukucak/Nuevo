@@ -28,19 +28,19 @@ const App = () => {
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
-  const filtered = data.filter((a) => { // filters JSON according to search
+  const filtered = data.filter((item) => { // filters JSON according to search
 
-    const nameFilter = a.name.toUpperCase().includes(searched.toUpperCase())
-    const companyFilter = a.company.includes(companyFiltered);
-    const jobAreaFilter = a.area.includes(areaFiltered);
-    const descFilter = a.jobdescription.toUpperCase().includes(descFiltered.toUpperCase());
+    const nameFilter = item.name.toUpperCase().includes(searched.toUpperCase())
+    const companyFilter = item.company.includes(companyFiltered);
+    const jobAreaFilter = item.area.includes(areaFiltered);
+    const descFilter = item.jobdescription.toUpperCase().includes(descFiltered.toUpperCase());
 
     return nameFilter && companyFilter && jobAreaFilter && descFilter;
 
   });                                   // filters JSON according to search
 
   const currentCards = filtered
-    .slice(indexOfFirstCard, indexOfLastCard)
+    .slice(indexOfFirstCard, indexOfLastCard);
   // applies search criteria to filtered data and then applies area filter
 
   const paginateFront = () => setCurrentPage(currentPage + 1);
@@ -95,6 +95,7 @@ const App = () => {
               onSubmit={handleFilterClick}
             />
             <Pagination
+              data={currentCards}
               postsPerPage={cardsPerPage}
               totalPosts={filtered.length}
               paginateBack={paginateBack}
@@ -110,7 +111,11 @@ const App = () => {
               onCompanyFilter={(e) => setCompanyFilter(e.target.value)}
             />
             <div className={(show) ? "block" : "hidden"}>
-              <List data={currentCards} search={searched} loading={loading} error={error} />
+              <List
+                data={currentCards}
+                search={searched}
+                loading={loading}
+                error={error} />
             </div>
           </div>
         </div>
