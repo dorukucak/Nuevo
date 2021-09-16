@@ -84,10 +84,10 @@ const App = () => {
 
   return (
     <>
-      <div id="main container" className="px-20 font-serif">
+      <div id="main container" className="px-10 my-5 sm:px-20 font-serif">
         <Header />
-        <div className={(show) ? "grid grid-cols-3 gap-10 justify-center" : "flex justify-center items-center h-full"}>
-          <div className={(show) ? "block h-full" : "hidden"}>
+        <div className={(show) ? "flex flex-col md:grid md:grid-cols-3 gap-10 justify-center" : "flex justify-center items-center h-full"}>
+          <div className={(show) ? "block h-full order-2 md:order-1" : "hidden"}>
             <Filter
               data={data}
               onAreaFilter={(e) => setAreaFilter(e.target.value)}
@@ -103,7 +103,7 @@ const App = () => {
               currentPage={currentPage}
             />
           </div>
-          <div className="col-span-2 flex flex-col space-y-10  ">
+          <div className="col-span-2 flex flex-col space-y-10 order-1 md:order-2 ">
             <Search
               data={data}
               onChange={(e) => setSearch(e.target.value)}

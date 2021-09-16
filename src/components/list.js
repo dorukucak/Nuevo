@@ -8,7 +8,7 @@ const List = ({ data, loading, error }) => {
     else {
         return (
             <>
-                <div className="border-2 border-black flex flex-col space-y-10 p-16">
+                <div className="border-2 border-black flex flex-col space-y-10 p-5 md:p-16">
 
 
                     {data.length === 0 ? "No person found" :
@@ -18,7 +18,7 @@ const List = ({ data, loading, error }) => {
 
                         (<div key={item.id}>
                             <div className="flex flex-row space-x-10 items-center">
-                                <div name="photo" className="border border-black h-20 w-20">
+                                <div name="photo" className="border border-black flex-none h-16 w-16 md:h-20 md:w-20">
                                     <img src={item.image} alt={item.name} onError={(e) => { e.target.src = defaultImage; e.target.onError = null; }} />
                                 </div>
                                 <div name="info" className="flex flex-col space-y-1">
