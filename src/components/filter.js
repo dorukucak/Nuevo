@@ -17,7 +17,7 @@ const Filter = ({ data, onSubmit, onAreaFilter, onDescFilter }) => {
           )
         }
       </select>
-      <button className="bg-gray-400 text-white w-1/2 h-10">Search</button>
+      <button className="bg-gray-400 text-white w-1/2 h-10">Filter</button>
       </form>
     
       </div>

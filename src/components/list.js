@@ -1,4 +1,4 @@
-
+import defaultImage from '../images/defaultImage.jpg';
 
 const List = ({ data, loading, error }) => {
 
@@ -16,7 +16,7 @@ const List = ({ data, loading, error }) => {
                     (<div key={item.id}>
                         <div className="flex flex-row space-x-10 items-center">
                             <div name="photo" className="border border-black h-20 w-20">
-                                <img src={`${item.image}`} />
+                                <img src={item.image} alt={item.name} onError={(e)=> {e.target.src = defaultImage ; e.target.onError=null; }}  />
                             </div>
                             <div name="info" className="flex flex-col space-y-1">
                                 <p name="name" className="text-lg">{item.name}</p>
