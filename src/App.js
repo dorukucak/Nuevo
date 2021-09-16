@@ -15,20 +15,25 @@ const App = () => {
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(null);
   const [searched, setSearched] = useState(""); 
-  // Pagination
+  // Pagination setup
   const [cardsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
-  //Get current number of individuals
-  const indexOfLastCard = currentPage * cardsPerPage ;
+  //Index of cards in current page
+  const indexOfLastCard = currentPage * cardsPerPage  ;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = data.slice(indexOfFirstCard, indexOfLastCard);
+  const filtered = data.filter((a) => a.name.toUpperCase().startsWith(search.toUpperCase()));
+  const currentCards = filtered.slice(indexOfFirstCard, indexOfLastCard); // cards visible in screen
   const paginateFront = () => setCurrentPage(currentPage + 1);
   const paginateBack = () => setCurrentPage(currentPage - 1);
+
+ 
+
 
   const handleSearchClick = (e) => {
     e.preventDefault();
     setShow(true);
-    setSearched(search);    // prevents immediate search change - sends what search value we want to <List />
+    setSearched(search);  // prevents immediate search change - sends what search value we want to <List />
+ 
   }
 
   useEffect(() => {
@@ -51,6 +56,8 @@ const App = () => {
         });
 }, []);
 
+
+
   return (
     <>
       <div id="main container" className="px-20">
@@ -60,7 +67,7 @@ const App = () => {
           <Filter />
           <Pagination
         postsPerPage={cardsPerPage}
-        totalPosts={data.length}
+        totalPosts={filtered.length}
         paginateBack={paginateBack}
         paginateFront={paginateFront}
         currentPage={currentPage}
