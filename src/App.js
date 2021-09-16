@@ -16,23 +16,33 @@ const App = () => {
   const [show, setShow] = useState(null);
   const [searched, setSearched] = useState("");
   const [companyFilter, setCompanyFilter] = useState("");
-  const [companyFiltered, setCompanyFiltered] =useState("")
+  const [companyFiltered, setCompanyFiltered] = useState("");
+  const [areaFilter, setAreaFilter] = useState("");
+  const [areaFiltered, setAreaFiltered] = useState("");
+  const [descFilter, setDescFilter] = useState("");
+  const [descFiltered, setDescFiltered] = useState("");
   // PAGINATION SETUP
   const [cardsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
   //Index of cards in current page
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const filtered = data.filter((a) => {
-    
-  const nameFilter = a.name.toUpperCase().includes(searched.toUpperCase())
-  const companyFilter = a.company.includes(companyFiltered);
-  
-  return nameFilter && companyFilter // filters JSON according to search
 
-});
+  const filtered = data.filter((a) => { // filters JSON according to search
 
-  const currentCards = filtered.slice(indexOfFirstCard, indexOfLastCard); // cards visible in screen
+    const nameFilter = a.name.toUpperCase().includes(searched.toUpperCase())
+    const companyFilter = a.company.includes(companyFiltered);
+    const jobAreaFilter = a.area.includes(areaFiltered);
+    const descFilter = a.jobdescription.toUpperCase().includes(descFiltered.toUpperCase());
+
+    return nameFilter && companyFilter && jobAreaFilter && descFilter;
+
+  });                                   // filters JSON according to search
+
+  const currentCards = filtered
+    .slice(indexOfFirstCard, indexOfLastCard)
+  // applies search criteria to filtered data and then applies area filter
+
   const paginateFront = () => setCurrentPage(currentPage + 1);
   const paginateBack = () => setCurrentPage(currentPage - 1);
 
@@ -42,6 +52,12 @@ const App = () => {
     setSearched(search);
     setCompanyFiltered(companyFilter)  // prevents immediate search change - sends what search value we want to <List />
     setCurrentPage(1);
+  }
+
+  const handleFilterClick = (e) => {
+    e.preventDefault();
+    setAreaFiltered(areaFilter); // this function prevents immediate filter change
+    setDescFiltered(descFilter);
   }
 
   useEffect(() => {
@@ -72,7 +88,12 @@ const App = () => {
         <Header />
         <div className="grid grid-cols-3 justify-center">
           <div className={(show) ? "block h-full" : "hidden"}>
-            <Filter />
+            <Filter
+              data={data}
+              onAreaFilter={(e) => setAreaFilter(e.target.value)}
+              onDescFilter={(e) => setDescFilter(e.target.value)}
+              onSubmit={handleFilterClick}
+            />
             <Pagination
               postsPerPage={cardsPerPage}
               totalPosts={filtered.length}
@@ -82,7 +103,12 @@ const App = () => {
             />
           </div>
           <div className="col-span-2 flex flex-col space-y-10  ">
-            <Search data={data} onChange={(e) => setSearch(e.target.value)} onSubmit={handleSearchClick} onCompanyFilter={(e) => setCompanyFilter(e.target.value)} />
+            <Search
+              data={data}
+              onChange={(e) => setSearch(e.target.value)}
+              onSubmit={handleSearchClick}
+              onCompanyFilter={(e) => setCompanyFilter(e.target.value)}
+            />
             <div className={(show) ? "block" : "hidden"}>
               <List data={currentCards} search={searched} loading={loading} error={error} />
             </div>
