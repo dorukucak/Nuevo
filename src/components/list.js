@@ -1,6 +1,6 @@
 
 
-const List = ({ data, search, loading, error }) => {
+const List = ({ data, loading, error }) => {
 
 
     if (loading) return ("Loading...");

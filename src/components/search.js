@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-const List = ({ onChange, data, onSubmit }) => {
+const List = ({ onChange, data, onSubmit, onCompanyFilter }) => {
 
   const uniqCo = [...new Set(data)]; //removes duplicate company names
 
@@ -8,8 +7,8 @@ const List = ({ onChange, data, onSubmit }) => {
       <div className="border-2 border-black p-5">
         <form className="flex flex-row space-x-10" onSubmit={onSubmit}>
           <input type="text" placeholder="Name" name="name" className="w-full" onChange={onChange}/>
-          <select className="w-full">
-          <option>All companies</option>
+          <select className="w-full" onChange={onCompanyFilter}>
+          <option value="">All companies</option>
             {
               uniqCo.map((item) =>
                 <option value={item.company}>{item.company}</option>
