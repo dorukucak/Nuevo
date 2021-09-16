@@ -17,7 +17,6 @@ const List = ({ onChange, data, onSubmit }) => {
           </select>
           <button className="bg-gray-400 text-white w-1/2 h-10">Search</button>
         </form>
-
       </div>
 
     </>

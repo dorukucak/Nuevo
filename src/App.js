@@ -13,12 +13,21 @@ const App = () => {
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
   const [show, setShow] = useState(null);
-  const [searched, setSearched] = useState("");
+  const [searched, setSearched] = useState(""); 
+  // Paginate
+  const [cardsPerPage] = useState(3);
+  const [currentPage, setCurrentPage] = useState(1);
+  //Get current number of individuals
+  const indexOfLastPost = currentPage * cardsPerPage;
+  const indexOfFirstPost = indexOfLastCard - cardsPerPage;
+  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
+  const paginateFront = () => setCurrentPage(currentPage + 1);
+  const paginateBack = () => setCurrentPage(currentPage - 1);
 
   const handleSearchClick = (e) => {
     e.preventDefault();
     setShow(true);
-    setSearched(search);    
+    setSearched(search);    // prevents immediate search change - sends what search value we want to <List />
   }
 
 
