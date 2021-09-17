@@ -21,7 +21,7 @@ const List = ({ onChange, data, onSubmit, onCompanyFilter }) => {
           >
             <option value="">All companies</option>
             {uniqCo.map((item) => (
-              <option value={item.company}>{item.company}</option>
+              <option value={item.company ? item.company : "no company info"}>{item.company ? item.company : null}</option>
             ))}
           </select>
           <button className="bg-green-600 text-white w-1/2 h-10">Search</button>
