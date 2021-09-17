@@ -1,5 +1,5 @@
 const Filter = ({ data, onSubmit, onAreaFilter, onDescFilter }) => {
-  const Jobs = data.map((item) => item.area).sort();
+  const Jobs = data.map((item) => (item.area ? item.area : "area not found")).sort();
   const uniqJobs = [...new Set(Jobs)]; //removes duplicate company names
 
   return (

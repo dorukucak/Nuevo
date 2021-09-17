@@ -18,25 +18,33 @@ const App = () => {
   const [areaFiltered, setAreaFiltered] = useState("");
   const [descFilter, setDescFilter] = useState("");
   const [descFiltered, setDescFiltered] = useState("");
+
+  // FILTER FUNCTION
+  let filtered = [];
+  function prepareFiltered(data) {
+    filtered = data.filter((item) => {
+      const nameFilter = item.name
+        .toUpperCase()
+        .includes(searched.toUpperCase());
+      const companyFilter = item.company.includes(companyFiltered);
+      const jobAreaFilter = item.area.includes(areaFiltered);
+      const descFilter = item.jobdescription
+        .toUpperCase()
+        .includes(descFiltered.toUpperCase());
+      return nameFilter && companyFilter && jobAreaFilter && descFilter;
+    });
+    return filtered;
+  } // filters JSON according to search
+
+  prepareFiltered(data);
+  
   // PAGINATION SETUP
   const [cardsPerPage] = useState(3);
   const [currentPage, setCurrentPage] = useState(1);
-  //Index of cards in current page
+  // Index of cards in current page
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-
-  const filtered = data.filter((item) => {
-    // filters JSON according to search
-
-    const nameFilter = item.name.toUpperCase().includes(searched.toUpperCase());
-    const companyFilter = item.company.includes(companyFiltered);
-    const jobAreaFilter = item.area.includes(areaFiltered);
-    const descFilter = item.jobdescription
-      .toUpperCase()
-      .includes(descFiltered.toUpperCase());
-
-    return nameFilter && companyFilter && jobAreaFilter && descFilter;
-  }); // filters JSON according to search
+ 
 
   const currentCards = filtered.slice(indexOfFirstCard, indexOfLastCard);
   // applies search criteria to filtered data and then applies area filter
