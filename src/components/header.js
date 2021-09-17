@@ -1,12 +1,14 @@
 const Header = () => {
-    return (
-      <>
+  return (
+    <>
       <div className="px-10 h-full border-b-2 border-black mb-10">
-      <p className="text-lg font-black pt-10">A CASE<span className="text-2xl font-thin"> by</span>  <span className="font-normal"> Doruk Uçak</span></p>
+        <p className="text-lg font-black pt-10">
+          A CASE<span className="text-2xl font-thin"> by</span>{" "}
+          <span className="font-normal"> Doruk Uçak</span>
+        </p>
       </div>
-          
-     </>
-    );
-  }
-  
-  export default Header;
+    </>
+  );
+};
+
+export default Header;

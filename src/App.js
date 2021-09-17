@@ -1,14 +1,11 @@
 import React, { useState, useEffect } from "react";
-import Header from './components/header';
-import Filter from './components/filter';
-import List from './components/list';
-import Search from './components/search';
-import Pagination from './components/pagination';
-
-
+import Header from "./components/header";
+import Filter from "./components/filter";
+import List from "./components/list";
+import Search from "./components/search";
+import Pagination from "./components/pagination";
 
 const App = () => {
-
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -28,19 +25,20 @@ const App = () => {
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
 
-  const filtered = data.filter((item) => { // filters JSON according to search
+  const filtered = data.filter((item) => {
+    // filters JSON according to search
 
-    const nameFilter = item.name.toUpperCase().includes(searched.toUpperCase())
+    const nameFilter = item.name.toUpperCase().includes(searched.toUpperCase());
     const companyFilter = item.company.includes(companyFiltered);
     const jobAreaFilter = item.area.includes(areaFiltered);
-    const descFilter = item.jobdescription.toUpperCase().includes(descFiltered.toUpperCase());
+    const descFilter = item.jobdescription
+      .toUpperCase()
+      .includes(descFiltered.toUpperCase());
 
     return nameFilter && companyFilter && jobAreaFilter && descFilter;
+  }); // filters JSON according to search
 
-  });                                   // filters JSON according to search
-
-  const currentCards = filtered
-    .slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = filtered.slice(indexOfFirstCard, indexOfLastCard);
   // applies search criteria to filtered data and then applies area filter
 
   const paginateFront = () => setCurrentPage(currentPage + 1);
@@ -50,15 +48,15 @@ const App = () => {
     e.preventDefault();
     setShow(true); // reveals filter and list components
     setSearched(search);
-    setCompanyFiltered(companyFilter)  // prevents immediate search change - sends what search value we want to <List />
+    setCompanyFiltered(companyFilter); // prevents immediate search change - sends what search value we want to <List />
     setCurrentPage(1);
-  }
+  };
 
   const handleFilterClick = (e) => {
     e.preventDefault();
     setAreaFiltered(areaFilter); // this function prevents immediate filter change
     setDescFiltered(descFilter);
-  }
+  };
 
   useEffect(() => {
     fetch("https://5f7335deb63868001615f557.mockapi.io/list")
@@ -68,7 +66,7 @@ const App = () => {
         }
         throw response;
       })
-      .then(data => {
+      .then((data) => {
         setData(data);
       })
       .catch((error) => {
@@ -80,56 +78,67 @@ const App = () => {
       });
   }, []);
 
-
-
   return (
     <>
       <div id="main container" className="px-10 my-5 sm:px-20 font-serif">
         <Header />
-        <div className={(show) ? "flex flex-col md:grid md:grid-cols-3 gap-10 justify-center" : "flex justify-center items-center h-full"}>
-          <div className={(show) ? "flex md:block h-full order-2 md:order-1" : "hidden"}>
-          <div className="order-2 w-full">
-          <Filter
-              data={data}
-              onAreaFilter={(e) => setAreaFilter(e.target.value)}
-              onDescFilter={(e) => setDescFilter(e.target.value)}
-              onSubmit={handleFilterClick}
-              
-            />
+        <div
+          className={
+            show
+              ? "flex flex-col md:grid md:grid-cols-3 gap-10 justify-center"
+              : "flex justify-center items-center h-full"
+          }
+        >
+          <div
+            className={
+              show ? "flex md:block h-full order-2 md:order-1" : "hidden"
+            }
+          >
+            <div className="order-2 w-full">
+              <Filter
+                data={data}
+                onAreaFilter={(e) => setAreaFilter(e.target.value)}
+                onDescFilter={(e) => setDescFilter(e.target.value)}
+                onSubmit={handleFilterClick}
+              />
             </div>
             <div className="items-start">
-            <Pagination
-              data={currentCards}
-              postsPerPage={cardsPerPage}
-              totalPosts={filtered.length}
-              paginateBack={paginateBack}
-              paginateFront={paginateFront}
-              currentPage={currentPage}
-              
-            />
+              <Pagination
+                data={currentCards}
+                postsPerPage={cardsPerPage}
+                totalPosts={filtered.length}
+                paginateBack={paginateBack}
+                paginateFront={paginateFront}
+                currentPage={currentPage}
+              />
             </div>
           </div>
-          <div className={show ? "col-span-2 flex flex-col space-y-10 order-1 md:order-2" : "w-4/5"}>
+          <div
+            className={
+              show
+                ? "col-span-2 flex flex-col space-y-10 order-1 md:order-2"
+                : "w-4/5"
+            }
+          >
             <Search
               data={data}
               onChange={(e) => setSearch(e.target.value)}
               onSubmit={handleSearchClick}
               onCompanyFilter={(e) => setCompanyFilter(e.target.value)}
             />
-            <div className={(show) ? "block" : "hidden"}>
+            <div className={show ? "block" : "hidden"}>
               <List
                 data={currentCards}
                 search={searched}
                 loading={loading}
-                error={error} />
+                error={error}
+              />
             </div>
           </div>
         </div>
-
       </div>
-
     </>
   );
-}
+};
 
 export default App;
