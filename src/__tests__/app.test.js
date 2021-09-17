@@ -8,23 +8,18 @@ afterEach(cleanup);
 describe("App", () => {
   test("renders App component", () => {
     render(<App />);
-
-    screen.debug();
   });
 });
 
 describe("Search", () => {
   test("renders Search component", () => {
     render(<Search />);
-
-    screen.debug();
   });
 });
 
 describe("App", () => {
   test("renders Search button", () => {
     render(<App />);
-
     screen.getByText("Search");
   });
 });
@@ -32,7 +27,6 @@ describe("App", () => {
 describe("Search", () => {
   test("renders Name field placeholder", () => {
     render(<Search />);
-
     screen.getByPlaceholderText("Name");
   });
 });
@@ -40,7 +34,6 @@ describe("Search", () => {
 describe("Search", () => {
   test("renders All companies as default", () => {
     render(<Search />);
-
     screen.getByText("All companies");
   });
 });
