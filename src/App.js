@@ -109,7 +109,7 @@ const App = () => {
             />
             </div>
           </div>
-          <div className="col-span-2 flex flex-col space-y-10 order-1 md:order-2 ">
+          <div className={show ? "col-span-2 flex flex-col space-y-10 order-1 md:order-2" : "w-4/5"}>
             <Search
               data={data}
               onChange={(e) => setSearch(e.target.value)}

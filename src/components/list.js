@@ -22,9 +22,9 @@ const List = ({ data, loading, error }) => {
                                     <img src={item.image} alt={item.name} onError={(e) => { e.target.src = defaultImage; e.target.onError = null; }} />
                                 </div>
                                 <div name="info" className="flex flex-col space-y-1">
-                                    <p name="name" className="text-lg">{item.name}</p>
-                                    <p name="company">{item.company}</p>
-                                    <p name="job description">{item.jobdescription}</p>
+                                    <p name="name" className="text-lg">{item.name ? item.name : "Name not found"}</p>
+                                    <p name="company">{item.company ? item.company : "Company not found"}</p>
+                                    <p name="job description">{item.jobdescription ? item.jobdescription : "Job not found"}</p>
                                 </div>
                             </div>
                         </div>)
